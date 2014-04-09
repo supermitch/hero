@@ -4,7 +4,7 @@ import pygame
 from pygame.locals import *
 
 from planet import Planet
-from hero import Hero
+from player import Player
             
 class Game(object):
     
@@ -21,8 +21,8 @@ class Game(object):
         self.planet = Planet(self.width, self.height)
         self.background = self.planet.render()
 
-        self.hero = Hero(self.width, self.height)
-        self.allsprites = pygame.sprite.Group(self.hero)
+        self.player = Player(self.width, self.height)
+        self.allsprites = pygame.sprite.Group(self.player)
 
     def main_loop(self):
         """ This is the Main Loop of the Game. """
@@ -35,12 +35,12 @@ class Game(object):
                     return None
                 elif event.type == KEYDOWN:
                     if event.key in (K_LEFT, K_RIGHT, K_UP, K_DOWN):
-                        self.hero.change_speed(event.key, key_down=True)
+                        self.player.change_speed(event.key, key_down=True)
                     elif event.key in (K_ESCAPE, K_q):
                         pygame.event.post(pygame.event.Event(QUIT))
                 elif event.type == KEYUP:
                     if event.key in (K_LEFT, K_RIGHT, K_UP, K_DOWN):
-                        self.hero.change_speed(event.key, key_down=False)
+                        self.player.change_speed(event.key, key_down=False)
 
             bg_pos = (0, 0)
             
