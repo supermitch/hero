@@ -6,7 +6,8 @@ class Player(pygame.sprite.DirtySprite):
     def __init__(self, screen_half_w, screen_half_h):
         pygame.sprite.DirtySprite.__init__(self)  # Call base initialize
 
-        self.image = pygame.image.load('assets/images/human/hero_1.png').convert_alpha()
+        self.image = pygame.image.load(
+            'assets/images/human/hero_1.png').convert_alpha()
         self.w, self.h = self.image.get_size()
         self.image = pygame.transform.scale(self.image,
                     (int(self.w * 2), int(self.h * 2)))

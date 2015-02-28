@@ -10,7 +10,8 @@ class Monster(pygame.sprite.DirtySprite):
             'spider': 'spider_1.png',
             'slime': 'slime_1.png'
         }[kind]
-        self.image = pygame.image.load('assets/images/monster/' + image).convert_alpha()
+        self.image = pygame.image.load('assets/images/monster/'
+            + image).convert_alpha()
         self.w, self.h = self.image.get_size()
         self.image = pygame.transform.scale(self.image,
                     (int(self.w * 2), int(self.h * 2)))

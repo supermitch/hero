@@ -27,7 +27,7 @@ class Planet(object):
         self.tile_map = self._gen_map()
         self.tile_group = pygame.sprite.Group()
         self.view = pygame.sprite.Sprite()
-         
+
     def _gen_map(self):
         """ Generates our entire map's geological features. """
         print('Generating map...')
@@ -42,7 +42,7 @@ class Planet(object):
         f = 80.0
         octaves = 2
         persistence = 4
-        lacunarity = 0.5 
+        lacunarity = 0.5
         tile_map = [[None for y in xrange(height)] \
                      for x in xrange(width)]
         for i, j in product(xrange(width), xrange(height)):
@@ -55,7 +55,7 @@ class Planet(object):
             if j in (0, height -1):
                 kind = -1
             tile_map[i][j] = Tile(tile_size, pos, kind=int(z))
-            
+
         print('\t... done.')
         return tile_map
 

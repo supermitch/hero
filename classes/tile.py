@@ -1,10 +1,10 @@
 import pygame
 from pygame.locals import *
 
-
 class Tile(pygame.sprite.Sprite):
     """
     Tile object is a single tile of a planet.
+
     """
     def __init__(self, tile_size, pos, kind=None):
         # Initialize base class
@@ -61,7 +61,7 @@ class Tile(pygame.sprite.Sprite):
         self.terrain = terrain
         self.color = self.COLORS[self.terrain]
         self.image.fill(self.color)
-    
+
     def draw(self, screen):
         screen.blit(self.image, self.pos)
 

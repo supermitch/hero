@@ -7,9 +7,9 @@ from camera import Camera
 from planet import Planet
 from player import Player
 from monster import Monster
-            
+
 class Game(object):
-    
+
     def __init__(self):
         # Global setup
         self.screen_w = 640
@@ -41,7 +41,7 @@ class Game(object):
         while True:
 
             for event in pygame.event.get():
-                if event.type == pygame.QUIT: 
+                if event.type == pygame.QUIT:
                     pygame.quit()
                     return None
                 elif event.type == KEYDOWN:
@@ -52,7 +52,7 @@ class Game(object):
                 elif event.type == KEYUP:
                     if event.key in (K_LEFT, K_RIGHT, K_UP, K_DOWN):
                         self.player.change_speed(event.key, key_down=False)
-            
+
             #self.planet.update()
             self.screen.fill(Color("#000000"))
 
@@ -63,13 +63,13 @@ class Game(object):
             self.screen.blit(view.image,
                              #self.planet.view.rect)
                              self.camera.apply(view.rect))
-            
+
             for a in self.allsprites:
                 if a is not self.player:
                     a.update()
                 self.screen.blit(a.image, self.camera.apply(a.rect))
 
             pygame.display.update()
-            
+
             self.clock.tick(self.fps)
 
