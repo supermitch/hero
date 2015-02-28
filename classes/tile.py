@@ -52,7 +52,8 @@ class Tile(pygame.sprite.Sprite):
     def _set_color(self):
         color = int(self.terrain * 255/20.0) # 0 to 9 shifted to 0 to 255
         color = (color, color, color)
-        #color = self.COLORS[self.terrain]
+        if self.terrain == -1:
+            color = (255, 255, 0)
         self.image.fill(color)
 
     def _set_terrain(self, terrain):
