@@ -42,7 +42,7 @@ class Planet(object):
         f = 80.0
         octaves = 2
         persistence = 4
-        lacunarity = 0.5
+        lacunarity = 0.4
         tile_map = [[None for y in xrange(height)] \
                      for x in xrange(width)]
         for i, j in product(xrange(width), xrange(height)):
@@ -61,8 +61,9 @@ class Planet(object):
 
     def update(self):
         """ Update map elements that may be changing. """
-        for i, j in product(xrange(self.width), xrange(self.height)):
-            self.tile_map[i][j].rect.move_ip((1,0))
+        pass
+        #for i, j in product(xrange(self.width), xrange(self.height)):
+        #    self.tile_map[i][j].rect.move_ip((2,0))
 
     def render(self, center):
         """ Returns the entire map as an image. """
@@ -70,8 +71,8 @@ class Planet(object):
         half_w = self.screen_w / 2
         half_h = self.screen_h / 2
         tile_size = self.tile_size
-        l = (x - half_w) / tile_size
-        r = (x + half_w) / tile_size
+        l = (x - half_w - 2) / tile_size
+        r = (x + half_w - 2) / tile_size
         t = (y - half_h) / tile_size
         b = (y + half_h) / tile_size
         #l = 0

@@ -39,10 +39,8 @@ class Game(object):
         """ This is the Main Loop of the Game. """
 
         while True:
-
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    pygame.quit()
                     return None
                 elif event.type == KEYDOWN:
                     if event.key in (K_LEFT, K_RIGHT, K_UP, K_DOWN):
@@ -54,15 +52,13 @@ class Game(object):
                         self.player.change_speed(event.key, key_down=False)
 
             #self.planet.update()
-            self.screen.fill(Color("#000000"))
+            self.screen.fill(Color('#FFFFFF'))
 
             self.player.update()
             self.camera.update(self.player.rect)
 
             view = self.planet.render(self.player.rect.center)
-            self.screen.blit(view.image,
-                             #self.planet.view.rect)
-                             self.camera.apply(view.rect))
+            self.screen.blit(view.image, self.camera.apply(view.rect))
 
             for a in self.allsprites:
                 if a is not self.player:
