@@ -70,15 +70,10 @@ class Planet(object):
         x, y = center
         half_w = self.screen_w / 2
         half_h = self.screen_h / 2
-        tile_size = self.tile_size
-        l = (x - half_w - 2) / tile_size
-        r = (x + half_w - 2) / tile_size
-        t = (y - half_h) / tile_size
-        b = (y + half_h) / tile_size
-        #l = 0
-        #r = self.width / tile_size
-        #t = 0
-        #b = self.height / tile_size
+        l = (x - half_w - 2) / self.tile_size
+        r = (x + half_w - 2) / self.tile_size
+        t = (y - half_h) / self.tile_size
+        b = (y + half_h) / self.tile_size
 
         background = pygame.Surface((self.width, self.height))
         for i, j in product(xrange(l, r), xrange(t, b)):
@@ -86,7 +81,6 @@ class Planet(object):
                             self.tile_map[i][j].pos)
         self.view.image = background
         self.view.rect = pygame.Rect(0, 0,
-                                     self.screen_w * tile_size,
-                                     self.screen_h * tile_size )
+            self.screen_w * self.tile_size, self.screen_h * self.tile_size )
         return self.view
 
