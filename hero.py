@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import pygame
 
 from classes.game import Game

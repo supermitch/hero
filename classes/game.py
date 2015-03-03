@@ -58,7 +58,8 @@ class Game(object):
             self.camera.update(self.player.rect)
 
             view = self.planet.render(self.player.rect.center)
-            self.screen.blit(view.image, self.camera.apply(view.rect))
+            #self.screen.blit(view.image, self.camera.apply(view.rect))
+            self.screen.blit(view.image, view.rect)
 
             for a in self.allsprites:
                 if a is not self.player:

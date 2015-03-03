@@ -85,7 +85,7 @@ class Planet(object):
             background.blit(self.tile_map[i][j].image,
                             self.tile_map[i][j].pos)
         self.view.image = background
-        self.view.rect = pygame.Rect(l * tile_size, t * tile_size,
+        self.view.rect = pygame.Rect(0, 0,
                                      self.screen_w * tile_size,
                                      self.screen_h * tile_size )
         return self.view
