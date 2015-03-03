@@ -62,6 +62,6 @@ class Tile(pygame.sprite.Sprite):
         self.color = self.COLORS[self.terrain]
         self.image.fill(self.color)
 
-    def draw(self, screen):
-        screen.blit(self.image, self.pos)
+    def draw(self, surface):
+        surface.blit(self.image, self.pos)
 
