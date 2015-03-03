@@ -51,15 +51,14 @@ class Game(object):
                     if event.key in (K_LEFT, K_RIGHT, K_UP, K_DOWN):
                         self.player.change_speed(event.key, key_down=False)
 
-            #self.planet.update()
-            self.screen.fill(Color('#FFFFFF'))
+            self.screen.fill(Color('#000000'))
+            self.planet.update()
 
             self.player.update()
             self.camera.update(self.player.rect)
 
             view = self.planet.render(self.player.rect.center)
-            #self.screen.blit(view.image, self.camera.apply(view.rect))
-            self.screen.blit(view.image, view.rect)
+            self.screen.blit(view.image, self.camera.apply(view.rect))
 
             for a in self.allsprites:
                 if a is not self.player:
