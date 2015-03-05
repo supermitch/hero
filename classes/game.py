@@ -58,15 +58,12 @@ class Game(object):
             self.camera.update(self.player.rect)
 
             view = self.planet.render(self.player.rect.center)
-            #self.screen.blit(view.image, self.camera.apply(view.rect))
-            rect = self.camera.apply(view.rect)
-            print(rect)
-            self.screen.blit(view.image, rect)
+            self.screen.blit(view.image, self.camera.apply(view.rect))
 
             for a in self.allsprites:
                 if a is not self.player:
                     a.update()
-                self.screen.blit(a.image, a.rect)
+                self.screen.blit(a.image, self.camera.apply(a.rect))
 
             pygame.display.update()
 

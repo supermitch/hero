@@ -70,7 +70,7 @@ class Planet(object):
         x, y = center
         half_w = self.screen_w / 2
         half_h = self.screen_h / 2
-        l = (x - half_w - 2) / self.tile_size
+        l = (x - half_w - 20) / self.tile_size
         r = (x + half_w - 2) / self.tile_size
         t = (y - half_h) / self.tile_size
         b = (y + half_h) / self.tile_size
