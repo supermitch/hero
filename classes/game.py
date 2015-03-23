@@ -1,5 +1,6 @@
 import os, sys
 
+import pytmx
 import pygame
 from pygame.locals import *
 
@@ -24,6 +25,9 @@ class Game(object):
         map_w = 1280
         map_h = 960
         self.planet = Planet(map_w, map_h)
+        tmx_data = pytmx.load_pygame('maps/corsa.tmx')
+        for layer in tmxdata.visible_layers:
+            print(layer.name)
 
         self.player = Player(self.screen_w/2, self.screen_h/2)
 
