@@ -25,9 +25,7 @@ class Game(object):
         map_w = 1280
         map_h = 960
         self.planet = Planet(map_w, map_h)
-        tmx_data = pytmx.load_pygame('maps/corsa.tmx')
-        for layer in tmxdata.visible_layers:
-            print(layer.name)
+        self.map = pytmx.load_pygame('maps/corsa.tmx')
 
         self.player = Player(self.screen_w/2, self.screen_h/2)
 
@@ -56,13 +54,21 @@ class Game(object):
                         self.player.change_speed(event.key, key_down=False)
 
             self.screen.fill(Color('#000000'))
-            self.planet.update()
+            #self.planet.update()
 
             self.player.update()
             self.camera.update(self.player.rect)
 
-            view = self.planet.render(self.player.rect.center)
-            self.screen.blit(view.image, self.camera.apply(view.rect))
+            layer = 0
+            # TODO: Only plot dirty recs or at least only recs in visible
+            # screen
+            for x in range(self.map.width):
+                for y in range(self.map.height):
+                    image = self.map.get_tile_image(x, y, layer)
+                    if image is not None:
+                        position = x * self.map.tilewidth, y * self.map.tileheight
+                        self.screen.blit(image, position)
+            #self.screen.blit(view.image, self.camera.apply(view.rect))
 
             for a in self.allsprites:
                 if a is not self.player:
