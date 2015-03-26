@@ -55,6 +55,8 @@ class Game(object):
 
             self.planet.update()
 
+            self.player.update()
+
             self.camera.update(self.player.rect)
 
             layer = 0
