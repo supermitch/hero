@@ -4,12 +4,11 @@ from pygame import Rect
 
 class Camera(object):
 
-    def __init__(self, map_w, map_h, screen_w, screen_h):
-        self.state = Rect(0, 0, map_w, map_h)
-        self.screen_w = screen_w
-        self.screen_h = screen_h
-        self.half_w = int(screen_w / 2)
-        self.half_h = int(screen_h / 2)
+    def __init__(self, map_size, screen_size):
+        self.state = Rect(0, 0, map_size[0], map_size[1])
+        self.screen_w, self.screen_h = screen_size
+        self.half_w = int(self.screen_w / 2)
+        self.half_h = int(self.screen_h / 2)
 
     def update(self, target_rect):
         """ Update our position according to the player's position. """

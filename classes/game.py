@@ -15,17 +15,15 @@ class Game(object):
         # Global setup
         self.screen_w = 640
         self.screen_h = 480
-        self.screen = pygame.display.set_mode((self.screen_w, self.screen_h))
+        self.screen_size = (self.screen_w, self.screen_h)
+
+        self.screen = pygame.display.set_mode(self.screen_size)
         pygame.display.set_caption('Hero I')
 
         self.clock = pygame.time.Clock()
         self.fps = 60
 
-        # TODO: Would belong to a map object
-        map_w = 1280
-        map_h = 960
-        self.planet = Planet(map_w, map_h)
-        self.map = pytmx.load_pygame('maps/corsa.tmx')
+        self.planet = Planet(*self.screen_size)
 
         self.player = Player(self.screen_w/2, self.screen_h/2)
 
@@ -35,7 +33,7 @@ class Game(object):
 
         self.allsprites = pygame.sprite.Group(self.player, self.monsters)
 
-        self.camera = Camera(map_w, map_h, self.screen_w, self.screen_h)
+        self.camera = Camera(self.planet.size, self.screen_size)
 
     def main_loop(self):
         """ This is the Main Loop of the Game. """
@@ -53,20 +51,18 @@ class Game(object):
                     if event.key in (K_LEFT, K_RIGHT, K_UP, K_DOWN):
                         self.player.change_speed(event.key, key_down=False)
 
-            self.screen.fill(Color('#000000'))
-            #self.planet.update()
+            self.screen.fill(Color('#FF00FF'))
 
-            self.player.update()
+            self.planet.update()
+
             self.camera.update(self.player.rect)
 
             layer = 0
-            # TODO: Only plot dirty recs or at least only recs in visible
-            # screen
-            for x in range(self.map.width):
-                for y in range(self.map.height):
-                    image = self.map.get_tile_image(x, y, layer)
+            for x in range(self.planet.width):
+                for y in range(self.planet.height):
+                    image = self.planet.map.get_tile_image(x, y, layer)
                     if image is not None:
-                        position = x * self.map.tilewidth, y * self.map.tileheight
+                        position = x * self.planet.map.tilewidth, y * self.planet.map.tileheight
                         self.screen.blit(image, position)
             #self.screen.blit(view.image, self.camera.apply(view.rect))
 
