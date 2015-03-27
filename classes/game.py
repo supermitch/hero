@@ -59,14 +59,8 @@ class Game(object):
 
             self.camera.update(self.player.rect)
 
-            layer = 0
-            for x in range(self.planet.width):
-                for y in range(self.planet.height):
-                    image = self.planet.map.get_tile_image(x, y, layer)
-                    if image is not None:
-                        position = x * self.planet.map.tilewidth, y * self.planet.map.tileheight
-                        self.screen.blit(image, position)
-            #self.screen.blit(view.image, self.camera.apply(view.rect))
+            # Render the map (background)
+            self.screen.blit(self.planet.render(self.player.rect.center), (0, 0))
 
             for a in self.allsprites:
                 if a is not self.player:
