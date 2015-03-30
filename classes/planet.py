@@ -35,17 +35,29 @@ class Planet(object):
 
     def render(self, center):
         """ Returns the entire map as an image. """
-        #x, y = center
-        #half_w = self.screen_w / 2
-        #half_h = self.screen_h / 2
-        #l = (x - half_w - 20) / self.tile_size
-        #r = (x + half_w - 2) / self.tile_size
-        #t = (y - half_h) / self.tile_size
-        #b = (y + half_h) / self.tile_size
+        half_w = self.screen_w / 2
+        half_h = self.screen_h / 2
 
+        # The edges of the visible screen, in pixels
+        # assuming screen is centered on center
+        x, y = center
+        left, right = x - half_w, x + half_w
+        top, bottom = y - half_h, y + half_h
+
+        # map tile indices
+        min_i = left / self.map.tilewidth
+        max_i = right / self.map.tilewidth
+        min_j = top / self.map.tilewidth
+        max_j = bottom / self.map.tilewidth
+
+        # Bound possible indices
+        min_i = max(min_i, 0)
+        max_i = min(max_i, self.width)
+        min_j = max(min_j, 0)
+        max_j = min(max_j, self.height, max_j)
         layer = 0
-        for x in range(self.width):
-            for y in range(self.height):
+        for x in range(min_i, max_i):
+            for y in range(min_j, max_j):
                 image = self.map.get_tile_image(x, y, layer)
                 if image is not None:
                     position = x * self.map.tilewidth, y * self.map.tileheight
