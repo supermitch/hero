@@ -35,8 +35,8 @@ class Planet(object):
 
     def render(self, center):
         """ Returns the entire map as an image. """
-        half_w = self.screen_w / 2
-        half_h = self.screen_h / 2
+        half_w = self.screen_w / 2 / 2
+        half_h = self.screen_h / 2 / 2
 
         # The edges of the visible screen, in pixels
         # assuming screen is centered on center
@@ -45,30 +45,26 @@ class Planet(object):
         top, bottom = y - half_h, y + half_h
 
         # map tile indices
-        min_i = left / self.map.tilewidth
-        max_i = right / self.map.tilewidth
-        min_j = top / self.map.tilewidth
-        max_j = bottom / self.map.tilewidth
+        left_i = left / self.map.tilewidth
+        right_i = right / self.map.tilewidth
+        top_j = top / self.map.tilewidth
+        bottom_j = bottom / self.map.tilewidth
 
         # Bound possible indices
-        min_i = max(min_i, 0)
-        max_i = min(max_i, self.width)
-        min_j = max(min_j, 0)
-        max_j = min(max_j, self.height, max_j)
+        min_i = max(left_i, 0)
+        max_i = min(right_i, self.map.width)
+        min_j = max(top_j, 0)
+        max_j = min(bottom_j, self.map.height)
         layer = 0
+        self.surface.fill(Color('#FF00FF'))
+        count = 0
         for x in range(min_i, max_i):
             for y in range(min_j, max_j):
+                count += 1
                 image = self.map.get_tile_image(x, y, layer)
                 if image is not None:
                     position = x * self.map.tilewidth, y * self.map.tileheight
                     self.surface.blit(image, position)
+        print('rendered {} background tiles'.format(count))
         return self.surface
-
-        #for i, j in product(xrange(l, r), xrange(t, b)):
-        #    self.surface.blit(self.tile_map[i][j].image,
-        #                    self.tile_map[i][j].pos)
-        #self.view.image = background
-        #self.view.rect = pygame.Rect(0, 0,
-        #    self.screen_w * self.tile_size, self.screen_h * self.tile_size )
-        #return self.view
 

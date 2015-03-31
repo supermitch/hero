@@ -33,7 +33,7 @@ class Game(object):
 
         self.allsprites = pygame.sprite.Group(self.player, self.monsters)
 
-        self.camera = Camera(self.planet.size, self.screen_size)
+        self.camera = Camera(self.screen_size)
 
     def main_loop(self):
         """ This is the Main Loop of the Game. """
@@ -57,15 +57,17 @@ class Game(object):
 
             self.player.update()
 
-            self.camera.update(self.player.rect)
+            self.camera.update(self.player.rect.center)
 
             # Render the map (background)
-            self.screen.blit(self.planet.render(self.player.rect.center), (0, 0))
+            print(self.camera.state.center)
+            self.screen.blit(self.planet.render(self.camera.state.center), (0, 0))
 
             for a in self.allsprites:
                 if a is not self.player:
                     a.update()
-                self.screen.blit(a.image, self.camera.apply(a.rect))
+                #self.screen.blit(a.image, self.camera.apply(a.rect))
+                self.screen.blit(a.image, a.rect)
 
             pygame.display.update()
 
