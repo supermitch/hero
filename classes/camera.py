@@ -12,6 +12,7 @@ class Camera(object):
         self.state.center = pos
 
     def apply(self, target_rect):
-        """ Return a rectangle centered according to our location. """
-        return target_rect.move(self.state.topleft)
+        """ Return a new ectangle offset according to our location. """
+        dx, dy = self.state.topleft
+        return target_rect.move(-dx, -dy)
 

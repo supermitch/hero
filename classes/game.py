@@ -53,21 +53,20 @@ class Game(object):
 
             self.screen.fill(Color('#FF00FF'))
 
-            self.planet.update()
-
             self.player.update()
-
             self.camera.update(self.player.rect.center)
+            self.planet.update()
 
             # Render the map (background)
             print(self.camera.state.center)
             self.screen.blit(self.planet.render(self.camera.state.center), (0, 0))
 
             for a in self.allsprites:
-                if a is not self.player:
+                if a is self.player:
+                    self.screen.blit(a.image, a.rect)  # Don't apply camera offset
+                else:
                     a.update()
-                #self.screen.blit(a.image, self.camera.apply(a.rect))
-                self.screen.blit(a.image, a.rect)
+                    self.screen.blit(a.image, self.camera.apply(a.rect))
 
             pygame.display.update()
 
