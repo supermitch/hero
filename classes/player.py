@@ -15,6 +15,10 @@ class Player(pygame.sprite.DirtySprite):
         self.speed = 3
         self.v = [0.0, 0.0]
 
+    @property
+    def center(self):
+        return self.rect.center
+
     def update(self):
         self.rect.move_ip((self.v[0], self.v[1]))
 

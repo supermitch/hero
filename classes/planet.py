@@ -33,26 +33,30 @@ class Planet(object):
         """ Update map elements that may be changing. """
         pass
 
-    def render(self, center):
+    def render(self, reference_position):
         """ Returns the entire map as an image. """
-        half_w = self.screen_w / 2 / 2
-        half_h = self.screen_h / 2 / 2
+        print('reference: ', reference_position)
+        half_w = self.screen_w / 2 /2
+        half_h = self.screen_h / 2/ 2
 
         # The edges of the visible screen, in pixels
-        # assuming screen is centered on center
-        x, y = center
+        # assuming screen is centered on our reference
+        x, y = reference_position
         left, right = x - half_w, x + half_w
         top, bottom = y - half_h, y + half_h
 
         # map tile indices
         left_i = left / self.map.tilewidth
         right_i = right / self.map.tilewidth
+        print('right i', right_i)
         top_j = top / self.map.tilewidth
         bottom_j = bottom / self.map.tilewidth
 
         # Bound possible indices
         min_i = max(left_i, 0)
         max_i = min(right_i, self.map.width)
+        print('max i', max_i)
+
         min_j = max(top_j, 0)
         max_j = min(bottom_j, self.map.height)
         layer = 0
