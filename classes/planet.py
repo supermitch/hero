@@ -35,9 +35,14 @@ class Planet(object):
 
     def render(self, reference_position):
         """ Returns the entire map as an image. """
+
+        self.surface.fill(Color('#FF00FF'))
         print('reference: ', reference_position)
+
         half_w = self.screen_w / 2 /2
-        half_h = self.screen_h / 2/ 2
+        half_h = self.screen_h / 2 /2
+
+        surf_center = (half_w, half_h)
 
         # The edges of the visible screen, in pixels
         # assuming screen is centered on our reference
@@ -53,22 +58,18 @@ class Planet(object):
         bottom_j = bottom / self.map.tilewidth
 
         # Bound possible indices
-        min_i = max(left_i, 0)
-        max_i = min(right_i, self.map.width)
-        print('max i', max_i)
+        start_i = max(left_i, 0)
+        end_i = min(right_i, self.map.width)
+        print('end i', end_i)
 
-        min_j = max(top_j, 0)
-        max_j = min(bottom_j, self.map.height)
+        start_j = max(top_j, 0)
+        end_j = min(bottom_j, self.map.height)
         layer = 0
-        self.surface.fill(Color('#FF00FF'))
-        count = 0
-        for x in range(min_i, max_i):
-            for y in range(min_j, max_j):
-                count += 1
+        for x in range(start_i, end_i):
+            for y in range(start_j, end_j):
                 image = self.map.get_tile_image(x, y, layer)
                 if image is not None:
                     position = x * self.map.tilewidth, y * self.map.tileheight
                     self.surface.blit(image, position)
-        print('rendered {} background tiles'.format(count))
         return self.surface
 

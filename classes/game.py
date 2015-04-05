@@ -60,7 +60,9 @@ class Game(object):
             self.camera.update(self.player.center)
 
             # Render the map (background)
-            self.screen.blit(self.planet.render(self.player.center), self.camera.apply((0, 0)))
+            x = self.player.center[0] - self.screen_w/2
+            y = self.player.center[1] - self.screen_h/2
+            self.screen.blit(self.planet.render(self.player.center), (0, 0))
 
             for a in self.allsprites:
                 if a is not self.player:
