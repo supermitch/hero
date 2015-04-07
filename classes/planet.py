@@ -22,8 +22,6 @@ class Planet(object):
         self.width = self.map.width
         self.height = self.map.height
         self.size = (self.width, self.height)
-        # Display surface
-        self.surface = pygame.Surface((self.screen_w, self.screen_h))
 
     def _gen_map(self):
         """ Generates our entire map's geological features. """
@@ -35,9 +33,6 @@ class Planet(object):
 
     def render(self, reference_position):
         """ Returns the entire map as an image. """
-
-        self.surface.fill(Color('#FF00FF'))
-        print('reference: ', reference_position)
 
         half_w = self.screen_w / 2 /2
         half_h = self.screen_h / 2 /2
@@ -53,14 +48,14 @@ class Planet(object):
         # map tile indices
         left_i = left / self.map.tilewidth
         right_i = right / self.map.tilewidth
-        print('right i', right_i)
+        #print('right i', right_i)
         top_j = top / self.map.tilewidth
         bottom_j = bottom / self.map.tilewidth
 
         # Bound possible indices
         start_i = max(left_i, 0)
         end_i = min(right_i, self.map.width)
-        print('end i', end_i)
+        #print('end i', end_i)
 
         start_j = max(top_j, 0)
         end_j = min(bottom_j, self.map.height)
@@ -70,6 +65,5 @@ class Planet(object):
                 image = self.map.get_tile_image(x, y, layer)
                 if image is not None:
                     position = x * self.map.tilewidth, y * self.map.tileheight
-                    self.surface.blit(image, position)
-        return self.surface
+                    yield image, position
 
